@@ -1,7 +1,10 @@
 import { ReactElement } from 'react'
 import './controller.css'
+import { useGameBoard } from '../useGameboard'
 
 export function Component(): ReactElement {
+  const { currentRoom, setCurrentRoom, rooms } = useGameBoard()
+
   return (
     <>
       <h1 className="text-xl">Controller</h1>
@@ -14,7 +17,19 @@ export function Component(): ReactElement {
         </div>
         <div>
           <ul>
-            <li>Room A</li>
+            {rooms.map((room) => (
+              <li
+                key={room}
+                className={room === currentRoom ? 'bg-blue-200' : ''}
+              >
+                <button
+                  className="w-full text-left pl-2"
+                  onClick={() => setCurrentRoom(room)}
+                >
+                  {room}
+                </button>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
