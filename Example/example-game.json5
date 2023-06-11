@@ -1,0 +1,19 @@
+{
+  name: 'Example Game',
+  credits: ['Room 1 Music by <a href="https://pixabay.com/users/lexin_music-28841948/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=116199">Lexin_Music</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=116199">Pixabay</a>'],
+  rooms: [
+    {
+      name: 'Room 1',
+      map: 'room-1.png',
+      music: 'room-1.mp3',
+      gridOffset: {
+        x: 0,
+        y: 0
+      },
+    },
+    {
+      name: 'Outdoors',
+      map: 'outdoors.png'
+    }
+  ]
+}

@@ -17,9 +17,9 @@ export function Component(): ReactElement {
           <button className="btn btn-sm btn-neutral">Maximize</button>
         </div>
         <div>
-          {rooms?.length ? (
+          {rooms && rooms.length ? (
             <ul>
-              {rooms?.map((room) => (
+              {rooms.map((room) => (
                 <li
                   key={room.filename}
                   className={room === currentRoom ? 'bg-blue-200' : ''}

@@ -4,6 +4,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { CommonWindow } from './CommonWindow.tsx'
 import { NoDice } from './routes/NoDice.tsx'
+import { Component as Controller } from './routes/Controller.tsx'
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/controller',
-        lazy: () => import('./routes/Controller'),
+        element: <Controller />,
+        // lazy: () => import('./routes/Controller'),
       },
     ],
   },
