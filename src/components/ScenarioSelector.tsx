@@ -1,31 +1,33 @@
 import { ReactElement } from 'react'
-import { useGameBoard } from '../useGameboard.ts'
-import { Scenario } from '../types.ts'
+// import { useGameBoard } from '../useGameboard.ts'
+// import { Scenario } from '../types.ts'
 import { open } from '@tauri-apps/api/dialog'
+import { readBinaryFile } from '@tauri-apps/api/fs'
 
 export const ScenarioSelector = (): ReactElement => {
-  const { currentScenario, setCurrentScenario, scenarios } = useGameBoard()
+  // const { currentScenario, setCurrentScenario, scenarios } = useGameBoard()
 
   // Temporary for now until I figure out how to have Tauri's Rust code open a file to get the full page
   // useEffect(() => {
   //   setCurrentScenario()
   // }, [])
 
-  const selectScenario = (folderName: Scenario['folderName']) => {
-    console.log('Event ', folderName)
-    // const scenario = scenarios?.find(
-    //   (scenario) => scenario.folderName === folderName
-    // )
-    // if (scenario) {
-    //   setCurrentScenario(scenario)
-    // }
-  }
+  // const selectScenario = (folderName: Scenario['folderName']) => {
+  //   console.log('Event ', folderName)
+  //   // const scenario = scenarios?.find(
+  //   //   (scenario) => scenario.folderName === folderName
+  //   // )
+  //   // if (scenario) {
+  //   //   setCurrentScenario(scenario)
+  //   // }
+  // }
 
   const openFile = async () => {
     console.log('Sending command!')
     try {
       const result = await open({
         multiple: false,
+        title: 'Pick Scenario File',
         filters: [
           {
             name: 'Project Files',
@@ -35,6 +37,7 @@ export const ScenarioSelector = (): ReactElement => {
       })
       if (result) {
         console.log('Result', result)
+        await readBinaryFile(result as string)
       }
     } catch (err) {
       console.error(err)
