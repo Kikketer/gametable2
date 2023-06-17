@@ -1,9 +1,20 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+// Note for the future, plugin-legacy doesn't work for shit so don't try it
+// The nullish coallessing operator is not transpiled in the dependencies
+// https://github.com/vitejs/vite/blob/v4.0.5/packages/vite/CHANGELOG.md#compatibility
+// import legacy from '@vitejs/plugin-legacy'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    // legacy({
+    //   targets: {
+    //     safari: '12',
+    //   },
+    // }),
+  ],
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   // prevent vite from obscuring rust errors
