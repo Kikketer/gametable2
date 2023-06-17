@@ -1,6 +1,29 @@
-import { createRoot } from "react-dom/client";
-import { App } from "./App";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { CommonWindow } from './CommonWindow.tsx'
+import { NoDice } from './routes/NoDice.tsx'
+import { Component as Controller } from './routes/Controller.tsx'
 
-const root = createRoot(document.getElementById("app"));
+const router = createBrowserRouter([
+  {
+    element: <CommonWindow />,
+    errorElement: <NoDice />,
+    children: [
+      {
+        path: '/controller',
+        element: <Controller />,
+        // lazy: () => import('./routes/Controller'),
+      },
+    ],
+  },
+])
 
-root.render(<App />);
+ReactDOM.createRoot(document.getElementById('app') as HTMLElement).render(
+  <React.StrictMode>
+    <div className="container p-2 mx-auto my-3 border-2 rounded-md">
+      <RouterProvider router={router} />
+    </div>
+  </React.StrictMode>
+)
