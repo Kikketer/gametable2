@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import { Outlet } from 'react-router-dom'
-import { GameBoardProvider } from './GameBoard.context.tsx'
+import { GameBoardProvider } from './GameBoardProvider.tsx'
 
 export const CommonWindow = (): ReactElement => {
   return (

@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { CommonWindow } from './CommonWindow.tsx'
-import { NoDice } from './routes/NoDice.tsx'
-import { Component as Controller } from './routes/Controller.tsx'
+import { CommonWindow } from './CommonWindow'
+import { NoDice } from './routes/NoDice'
+import { Component as Controller } from './routes/Controller'
 
 const router = createBrowserRouter([
   {

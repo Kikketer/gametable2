@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { GameBoardContextProps } from './types.ts'
-import { GameBoardContext } from './GameBoard.context.tsx'
+import { GameBoardContextProps } from './types'
+import { GameBoardContext } from './GameBoardProvider'
 
 export const useGameBoard = (): GameBoardContextProps => {
   const context = useContext(GameBoardContext)

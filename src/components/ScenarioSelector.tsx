@@ -1,26 +1,13 @@
-import { ReactElement } from 'react'
-// import { useGameBoard } from '../useGameboard.ts'
-// import { Scenario } from '../types.ts'
+import { ReactElement, useState } from 'react'
+import { useGameBoard } from '../useGameboard'
 import { open } from '@tauri-apps/api/dialog'
-import { readBinaryFile } from '@tauri-apps/api/fs'
+import { readTextFile } from '@tauri-apps/api/fs'
+import JSON5 from 'json5'
 
 export const ScenarioSelector = (): ReactElement => {
-  // const { currentScenario, setCurrentScenario, scenarios } = useGameBoard()
-
-  // Temporary for now until I figure out how to have Tauri's Rust code open a file to get the full page
-  // useEffect(() => {
-  //   setCurrentScenario()
-  // }, [])
-
-  // const selectScenario = (folderName: Scenario['folderName']) => {
-  //   console.log('Event ', folderName)
-  //   // const scenario = scenarios?.find(
-  //   //   (scenario) => scenario.folderName === folderName
-  //   // )
-  //   // if (scenario) {
-  //   //   setCurrentScenario(scenario)
-  //   // }
-  // }
+  const [error, setError] = useState<string>()
+  const [loading, setLoading] = useState<boolean>(false)
+  const { setCurrentScenario, currentScenario } = useGameBoard()
 
   const openFile = async () => {
     console.log('Sending command!')
@@ -35,41 +22,55 @@ export const ScenarioSelector = (): ReactElement => {
           },
         ],
       })
+
       if (result) {
-        console.log('Result', result)
-        await readBinaryFile(result as string)
+        setLoading(true)
+        console.log('got result')
+        const rawResult = await readTextFile(result as string)
+        const parsedResult = JSON5.parse(rawResult)
+        console.log('Setting result ', parsedResult)
+        setCurrentScenario({
+          path: Array.isArray(result) ? result[0] : result,
+          scenario: parsedResult,
+        })
       }
     } catch (err) {
       console.error(err)
+      setError('Bad news loading scenario')
     }
+
+    setLoading(false)
 
     // const result = await invoke('greet', { name: 'World' })
     // console.log('Respon', result)
   }
 
   return (
-    <div className="flex gap-3">
-      <label htmlFor="scenario-selector">Pick a scenario:</label>
-      <button className="btn" onClick={() => openFile()}>
-        Open File
-      </button>
-      {/*<input*/}
-      {/*  type="file"*/}
-      {/*  id="scenario-selector"*/}
-      {/*  accept=".json5"*/}
-      {/*  onChange={(e) => selectScenario(e.target.value)}*/}
-      {/*/>*/}
-      {/*<select*/}
-      {/*  id="scenario-selector"*/}
-      {/*  value={currentScenario?.folderName}*/}
-      {/*  onSelect={(e) => selectScenario(e.currentTarget.value)}*/}
-      {/*>*/}
-      {/*  {scenarios?.map((scenario) => (*/}
-      {/*    <option key={scenario.folderName} value={scenario.folderName}>*/}
-      {/*      {scenario.name}*/}
-      {/*    </option>*/}
-      {/*  ))}*/}
-      {/*</select>*/}
+    <div className="flex flex-col mb-3">
+      <div className="flex flex-row items-center">
+        {currentScenario ? (
+          <>
+            <p>{currentScenario.name}</p>
+            <button
+              className="btn btn-ghost btn-sm"
+              onClick={() => setCurrentScenario()}
+            >
+              X
+            </button>
+          </>
+        ) : (
+          <>
+            <label htmlFor="scenario-selector" className="mr-3">
+              Pick a scenario:
+            </label>
+            <button className="btn" onClick={() => openFile()}>
+              Open File
+            </button>
+          </>
+        )}
+      </div>
+      {loading && <p className="text-info">Loading...</p>}
+      {error && <p className="text-warning">{error}</p>}
     </div>
   )
 }
