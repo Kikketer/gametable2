@@ -7,7 +7,7 @@ type ImageProps = {
 
 const loadImage = async (path: string): Promise<string> => {
   console.log('Loading file from path ', path)
-  const imgBinary = await readBinaryFile(path, {
+  const imgBinary = await readBinaryFile('the-image.png', {
     dir: BaseDirectory.Document,
   })
   // const blob = new Blob([imgBinary], { type: 'application/octet-stream' })
