@@ -20,7 +20,7 @@
       fs: {
         all: false,
         readFile: true,
-        scope: ['$APPDATA', '$DOCUMENT', '$DESKTOP', '$DOWNLOAD', '$HOME']
+        scope: ['$HOME','$DOCUMENT']
       },
       shell: {
         all: false,
@@ -36,7 +36,7 @@
         'icons/icon.icns',
         'icons/icon.ico',
       ],
-      identifier: 'com.tauri.dev',
+      identifier: 'com.cjweed.gametabletwo',
       targets: 'all',
       macOS: {
         minimumSystemVersion: '10.14'

@@ -5,6 +5,8 @@ export const RoomSelector = () => {
   // const [currentRoomIndex, setCurrentRoomIndex] = useState<number>()
   const { currentScenario } = useGameBoard()
 
+  console.log('loading rooms?', currentScenario ? currentScenario.rooms : null)
+
   if (!currentScenario) return null
 
   return (

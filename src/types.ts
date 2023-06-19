@@ -10,7 +10,6 @@ export type Room = {
 }
 
 export type Scenario = {
-  folderName: string
   name?: string
   rooms: Room[]
 }

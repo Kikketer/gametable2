@@ -3,6 +3,7 @@ import './controller.css'
 import { ScenarioSelector } from '../components/ScenarioSelector'
 import { RoomSelector } from '../components/RoomSelector'
 import { useGameBoard } from '../useGameboard'
+import { Image } from '../components/Image'
 
 export function Component(): ReactElement {
   const { currentScenario } = useGameBoard()
@@ -17,12 +18,13 @@ export function Component(): ReactElement {
           <button className="btn btn-sm btn-neutral mb-1">Reload</button>
           <button className="btn btn-sm btn-neutral">Maximize</button>
         </div>
-        <div>
+        <div className="ml-4">
           <RoomSelector />
         </div>
       </div>
       <p>Temp:</p>
-      {currentScenario && <img src={currentScenario.rooms[0].ground} />}
+      {/*{currentScenario && <Image path={currentScenario.rooms[0].ground} />}*/}
+      <Image path={'the-image.png'} />
     </div>
   )
 }
