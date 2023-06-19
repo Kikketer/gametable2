@@ -50,6 +50,7 @@
     },
     windows: [
       {
+        label: 'Controller',
         fullscreen: false,
         resizable: true,
         title: 'Controller',
@@ -57,6 +58,16 @@
         height: 600,
         url: 'controller'
       },
+      {
+        label: 'Left',
+        fullscreen: false,
+        resizable: true,
+        title: '',
+        width: 800,
+        height: 600,
+        url: 'left',
+        titleBarStyle: 'Overlay',
+      }
     ],
   },
 }

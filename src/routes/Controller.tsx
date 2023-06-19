@@ -1,13 +1,9 @@
-import { ReactElement } from 'react'
 import './controller.css'
 import { ScenarioSelector } from '../components/ScenarioSelector'
 import { RoomSelector } from '../components/RoomSelector'
-import { useGameBoard } from '../useGameboard'
-import { Image } from '../components/Image'
+import { ImageLibrary } from '../components/ImageLibrary'
 
-export function Component(): ReactElement {
-  const { currentScenario, currentRoom } = useGameBoard()
-
+export function Component() {
   return (
     <div className="container p-2 mx-auto my-3 border-2 rounded-md flex flex-col">
       <ScenarioSelector />
@@ -23,9 +19,7 @@ export function Component(): ReactElement {
         </div>
       </div>
       <p>Temp:</p>
-      {currentScenario && (
-        <Image path={currentScenario.rooms[currentRoom || 0].floor} />
-      )}
+      <ImageLibrary />
     </div>
   )
 }

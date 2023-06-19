@@ -1,11 +1,12 @@
-import { ReactElement } from 'react'
-
-type LeftWindowProps = {
-  children?: ReactElement
+export function Component() {
+  return (
+    <div>
+      <div
+        style={{ width: 200, height: 200, background: 'orange' }}
+        data-tauri-drag-region
+      ></div>
+    </div>
+  )
 }
 
-export const LeftWindow = ({ children }: LeftWindowProps): ReactElement => {
-  return <div>{children}</div>
-}
-
-LeftWindow.displayName = 'LeftWindow'
+Component.displayName = 'LeftWindow'

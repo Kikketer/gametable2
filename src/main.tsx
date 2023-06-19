@@ -14,6 +14,10 @@ const router = createBrowserRouter([
         path: '/controller',
         lazy: () => import('./routes/Controller'),
       },
+      {
+        path: '/left',
+        lazy: () => import('./routes/LeftWindow'),
+      },
     ],
   },
 ])

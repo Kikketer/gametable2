@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 
 type ImageProps = {
   path: string
+  onLoadComplete?: () => void
+  className?: string
 }
 
 const loadImage = async (path: string): Promise<string> => {
@@ -29,7 +31,7 @@ const loadImage = async (path: string): Promise<string> => {
   })
 }
 
-export const Image = ({ path }: ImageProps) => {
+export const Image = ({ path, onLoadComplete, className }: ImageProps) => {
   const [img64, setImg64] = useState<string>('')
   const [error, setError] = useState<string>('')
 
@@ -39,6 +41,7 @@ export const Image = ({ path }: ImageProps) => {
       loadImage(path)
         .then((base64Image) => {
           setImg64(base64Image)
+          onLoadComplete && onLoadComplete()
         })
         .catch((err) => {
           console.error(err)
@@ -48,13 +51,10 @@ export const Image = ({ path }: ImageProps) => {
   }, [path])
 
   return (
-    <div>
-      <pre>{path}</pre>
+    <div className={className}>
       {error ? <pre>{error}</pre> : null}
-      {img64 ? (
+      {img64 && (
         <img src={`data:image/jpeg;base64,${img64}`} alt="Room Image" />
-      ) : (
-        <pre>Loading...</pre>
       )}
     </div>
   )
