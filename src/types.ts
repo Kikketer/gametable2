@@ -1,7 +1,7 @@
 export type Room = {
   filename: string
   name: string
-  ground: string
+  floor: string
   music?: string
   gridOffset?: {
     x: number
@@ -15,9 +15,9 @@ export type Scenario = {
 }
 
 export type GameBoardContextProps = {
-  // currentRoom?: Room
-  // setCurrentRoom: (room: Room) => void
-  // rooms: Room[]
+  currentRoom?: number
+  setCurrentRoom: (roomIndex: number) => void
+  rooms?: Room[]
   // scenarios: Scenario[]
   currentScenario?: Scenario
   setCurrentScenario: ({

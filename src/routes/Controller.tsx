@@ -6,10 +6,10 @@ import { useGameBoard } from '../useGameboard'
 import { Image } from '../components/Image'
 
 export function Component(): ReactElement {
-  const { currentScenario } = useGameBoard()
+  const { currentScenario, currentRoom } = useGameBoard()
 
   return (
-    <div className="flex flex-col">
+    <div className="container p-2 mx-auto my-3 border-2 rounded-md flex flex-col">
       <ScenarioSelector />
       <div className="controller-grid">
         <div className="flex flex-col">
@@ -23,8 +23,9 @@ export function Component(): ReactElement {
         </div>
       </div>
       <p>Temp:</p>
-      {/*{currentScenario && <Image path={currentScenario.rooms[0].ground} />}*/}
-      <Image path={'the-image.png'} />
+      {currentScenario && (
+        <Image path={currentScenario.rooms[currentRoom || 0].floor} />
+      )}
     </div>
   )
 }

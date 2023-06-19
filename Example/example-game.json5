@@ -4,7 +4,7 @@
   rooms: [
     {
       name: 'Room 1',
-      ground: 'room-1.png',
+      floor: 'room-1.png',
       music: 'room-1.mp3',
       gridOffset: {
         x: 0,
@@ -13,7 +13,7 @@
     },
     {
       name: 'Outdoors',
-      map: 'outdoors.png'
+      floor: 'outdoors.png'
     }
   ]
 }

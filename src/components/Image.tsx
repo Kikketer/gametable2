@@ -6,23 +6,27 @@ type ImageProps = {
 }
 
 const loadImage = async (path: string): Promise<string> => {
-  console.log('Loading file from path ', path)
   const imgBinary = await readBinaryFile(path, {
     dir: BaseDirectory.Document,
   })
-  // const blob = new Blob([imgBinary], { type: 'application/octet-stream' })
-  // const reader = new FileReader()
-  //
-  // reader.onload = () => {
-  //   const base64 = reader.result.split(',')[1]
-  //   // Use the base64 string here
-  //
-  //   return ''
-  // }
+  const blob = new Blob([imgBinary], { type: 'application/octet-stream' })
+  const reader = new FileReader()
 
-  // reader.readAsDataURL(blob)
+  return await new Promise((resolve, reject) => {
+    reader.onload = () => {
+      try {
+        if (typeof reader.result === 'string') {
+          const base64 = reader.result && reader.result.split(',')[1]
+          return resolve(base64)
+        }
+        reject(new Error('Invalid image'))
+      } catch (err) {
+        reject(err)
+      }
+    }
 
-  return ''
+    reader.readAsDataURL(blob)
+  })
 }
 
 export const Image = ({ path }: ImageProps) => {
@@ -31,6 +35,7 @@ export const Image = ({ path }: ImageProps) => {
 
   useEffect(() => {
     if (path) {
+      setImg64('')
       loadImage(path)
         .then((base64Image) => {
           setImg64(base64Image)
@@ -46,8 +51,10 @@ export const Image = ({ path }: ImageProps) => {
     <div>
       <pre>{path}</pre>
       {error ? <pre>{error}</pre> : null}
-      {img64 && (
+      {img64 ? (
         <img src={`data:image/jpeg;base64,${img64}`} alt="Room Image" />
+      ) : (
+        <pre>Loading...</pre>
       )}
     </div>
   )
