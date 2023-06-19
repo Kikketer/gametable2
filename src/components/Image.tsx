@@ -10,19 +10,21 @@ const loadImage = async (path: string): Promise<string> => {
   const imgBinary = await readBinaryFile('the-image.png', {
     dir: BaseDirectory.Document,
   })
-  // const blob = new Blob([imgBinary], { type: 'application/octet-stream' })
-  // const reader = new FileReader()
-  //
-  // reader.onload = () => {
-  //   const base64 = reader.result.split(',')[1]
-  //   // Use the base64 string here
-  //
-  //   return ''
-  // }
+  const blob = new Blob([imgBinary], { type: 'application/octet-stream' })
+  const reader = new FileReader()
 
-  // reader.readAsDataURL(blob)
+  const result = await new Promise((resolve, reject) => {
+    reader.onload = () => {
+      const base64 = reader.result.split(',')[1]
+      // Use the base64 string here
+      console.log('base? ', base64)
+      return resolve(base64)
+    }
 
-  return ''
+    reader.readAsDataURL(blob)
+  })
+
+  return result
 }
 
 export const Image = ({ path }: ImageProps) => {
