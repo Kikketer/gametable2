@@ -13,15 +13,6 @@
   tauri: {
     allowlist: {
       all: false,
-      dialog: {
-        all: false,
-        open: true
-      },
-      fs: {
-        all: false,
-        readFile: true,
-        scope: ['$DOCUMENT/GameBoard/**/*']
-      },
       shell: {
         all: false,
         open: true,
@@ -50,15 +41,6 @@
     },
     windows: [
       {
-        label: 'Controller',
-        fullscreen: false,
-        resizable: true,
-        title: 'Controller',
-        width: 800,
-        height: 600,
-        url: 'controller'
-      },
-      {
         label: 'Left',
         fullscreen: false,
         resizable: true,
@@ -66,7 +48,7 @@
         width: 800,
         height: 600,
         url: 'left',
-        titleBarStyle: 'Overlay',
+        decorations: false,
       }
     ],
   },
