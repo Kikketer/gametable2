@@ -1,11 +1,17 @@
+import { BoardWrap } from '../components/BoardWrap'
+import { appWindow } from '@tauri-apps/api/window'
+
 export function Component() {
+  const maxi = async () => {
+    await appWindow.maximize()
+  }
+
   return (
-    <div>
-      <div
-        style={{ width: 200, height: 200, background: 'orange' }}
-        data-tauri-drag-region
-      ></div>
-    </div>
+    <BoardWrap>
+      <button className="btn" onClick={maxi}>
+        Maximize
+      </button>
+    </BoardWrap>
   )
 }
 
